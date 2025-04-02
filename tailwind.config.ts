@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,15 +53,19 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				neon: {
+					blue: '#4DEEEA',
+					purple: '#9B5DE5',
+					pink: '#F15BB5',
+					yellow: '#FEE440',
+					green: '#00F5A0',
+					red: '#FF3366'
+				},
+				game: {
+					dark: '#0F1123',
+					darker: '#070816',
+					space: '#121330',
+					accent: '#2E3192'
 				}
 			},
 			borderRadius: {
@@ -70,25 +75,57 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'pulse-neon': {
+					'0%, 100%': { 
+						opacity: '1',
+						filter: 'brightness(1) drop-shadow(0 0 5px currentColor)'
 					},
-					to: {
-						height: '0'
+					'50%': { 
+						opacity: '0.8',
+						filter: 'brightness(1.2) drop-shadow(0 0 10px currentColor)' 
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-5px)'
+					}
+				},
+				'shooting-star': {
+					'0%': {
+						transform: 'translateX(0) translateY(0) rotate(-45deg)',
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'translateX(-100vw) translateY(100vh) rotate(-45deg)',
+						opacity: '0'
+					}
+				},
+				'twinkle': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '0.5'
 					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-neon': 'pulse-neon 2s infinite',
+				'float': 'float 3s ease-in-out infinite',
+				'shooting-star': 'shooting-star 5s linear infinite',
+				'twinkle': 'twinkle 4s ease-in-out infinite'
 			}
 		}
 	},
