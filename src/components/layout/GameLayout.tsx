@@ -10,10 +10,10 @@ interface GameLayoutProps {
 
 export const GameLayout: React.FC<GameLayoutProps> = ({ children, gameState }) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="p-4 border-b border-neon-blue">
+    <div className="h-screen w-screen overflow-hidden flex flex-col relative bg-game-dark">
+      <header className="absolute top-0 left-0 right-0 z-10 p-2">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl sm:text-3xl font-bold text-gradient animate-pulse-neon">
+          <h1 className="text-xl sm:text-2xl font-bold text-gradient animate-pulse-neon">
             Kyle's Galactic Rage
           </h1>
           
@@ -27,12 +27,12 @@ export const GameLayout: React.FC<GameLayoutProps> = ({ children, gameState }) =
         </div>
       </header>
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 relative">
         {children}
       </main>
       
-      <footer className="p-4 border-t border-neon-blue text-center text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} Kyle's Galactic Rage - The Ultimate Space Challenge</p>
+      <footer className="absolute bottom-0 left-0 right-0 p-1 text-center text-xs text-muted-foreground z-10">
+        <p>&copy; {new Date().getFullYear()} Kyle's Galactic Rage</p>
       </footer>
       
       <StarField starCount={150} />

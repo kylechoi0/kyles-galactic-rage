@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { gamepad, pauseCircle, play, arrowLeft, arrowRight } from 'lucide-react';
+import { Gamepad, PauseCircle, Play, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface GameControlsProps {
   onMoveLeft: () => void;
@@ -21,17 +21,17 @@ export const GameControls: React.FC<GameControlsProps> = ({
   isPaused
 }) => {
   return (
-    <div className="w-full sm:w-[600px] p-4 mt-4 bg-game-darker rounded-lg border border-neon-blue">
+    <div className="w-full p-4 bg-game-darker rounded-lg border border-neon-blue">
       <div className="grid grid-cols-3 gap-2">
         <div className="flex justify-center">
           <Button 
             variant="outline" 
             size="lg"
-            className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-game-accent text-white border-neon-blue"
+            className="h-16 w-16 rounded-full bg-game-accent text-white border-neon-blue"
             onTouchStart={onMoveLeft}
             onMouseDown={onMoveLeft}
           >
-            <arrowLeft className="h-8 w-8" />
+            <ArrowLeft className="h-8 w-8" />
           </Button>
         </div>
         
@@ -39,11 +39,11 @@ export const GameControls: React.FC<GameControlsProps> = ({
           <Button 
             variant="outline" 
             size="lg"
-            className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-neon-red text-white border-neon-red"
+            className="h-16 w-16 rounded-full bg-neon-red text-white border-neon-red"
             onTouchStart={onFire}
             onMouseDown={onFire}
           >
-            <gamepad className="h-8 w-8" />
+            <Gamepad className="h-8 w-8" />
           </Button>
         </div>
         
@@ -51,11 +51,11 @@ export const GameControls: React.FC<GameControlsProps> = ({
           <Button 
             variant="outline" 
             size="lg"
-            className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-game-accent text-white border-neon-blue"
+            className="h-16 w-16 rounded-full bg-game-accent text-white border-neon-blue"
             onTouchStart={onMoveRight}
             onMouseDown={onMoveRight}
           >
-            <arrowRight className="h-8 w-8" />
+            <ArrowRight className="h-8 w-8" />
           </Button>
         </div>
       </div>
@@ -69,12 +69,12 @@ export const GameControls: React.FC<GameControlsProps> = ({
         >
           {isPaused ? (
             <>
-              <play className="mr-2 h-4 w-4" />
+              <Play className="mr-2 h-4 w-4" />
               Resume
             </>
           ) : (
             <>
-              <pauseCircle className="mr-2 h-4 w-4" />
+              <PauseCircle className="mr-2 h-4 w-4" />
               Pause
             </>
           )}

@@ -84,10 +84,10 @@ export const GameCanvas: React.FC = () => {
 
   // Render game elements
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center h-full">
       <div 
         ref={canvasRef} 
-        className="relative w-full sm:w-[600px] h-[80vh] max-h-[800px] bg-game-darker border-2 border-neon-blue rounded-lg overflow-hidden"
+        className="relative w-full h-full bg-game-darker border-2 border-neon-blue overflow-hidden"
       >
         {/* Game elements */}
         {gameState.isGameStarted && (
@@ -115,7 +115,7 @@ export const GameCanvas: React.FC = () => {
         {/* Game overlay states */}
         {!gameState.isGameStarted && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-game-darker bg-opacity-80 z-10">
-            <h1 className="text-4xl md:text-6xl font-bold text-gradient mb-8 animate-pulse-neon">
+            <h1 className="text-3xl md:text-5xl font-bold text-gradient mb-8 animate-pulse-neon">
               Kyle's Galactic Rage
             </h1>
             <button 
@@ -154,16 +154,16 @@ export const GameCanvas: React.FC = () => {
 
         {/* HUD - Heads up display */}
         {gameState.isGameStarted && (
-          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 bg-game-darker bg-opacity-80 z-5">
+          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-2 bg-game-darker bg-opacity-80 z-5">
             <div className="flex items-center space-x-4">
-              <div className="text-neon-green font-bold">
+              <div className="text-neon-green font-bold text-sm">
                 LIVES: {gameState.player.lives}
               </div>
-              <div className="text-neon-blue font-bold">
+              <div className="text-neon-blue font-bold text-sm">
                 LEVEL: {gameState.level}
               </div>
             </div>
-            <div className="text-neon-yellow font-bold">
+            <div className="text-neon-yellow font-bold text-sm">
               SCORE: {gameState.score}
             </div>
           </div>
@@ -172,14 +172,16 @@ export const GameCanvas: React.FC = () => {
 
       {/* Game controls for mobile */}
       {gameState.isGameStarted && !gameState.isGameOver && (
-        <GameControls 
-          onMoveLeft={() => movePlayer('left', dimensions)}
-          onMoveRight={() => movePlayer('right', dimensions)}
-          onFire={firePlayerBullet}
-          onPause={pauseGame}
-          onResume={resumeGame}
-          isPaused={gameState.isPaused}
-        />
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+          <GameControls 
+            onMoveLeft={() => movePlayer('left', dimensions)}
+            onMoveRight={() => movePlayer('right', dimensions)}
+            onFire={firePlayerBullet}
+            onPause={pauseGame}
+            onResume={resumeGame}
+            isPaused={gameState.isPaused}
+          />
+        </div>
       )}
     </div>
   );
