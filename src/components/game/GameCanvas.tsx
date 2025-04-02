@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useGameState } from '@/hooks/useGameState';
 import { PlayerShip } from './PlayerShip';
@@ -8,6 +7,8 @@ import { Explosion } from './Explosion';
 import { PowerUp } from './PowerUp';
 import { GameControls } from './GameControls';
 import { toast } from 'sonner';
+import { Gamepad } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 
 export const GameCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,6 @@ export const GameCanvas: React.FC = () => {
   } = useGameState();
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  // Initialize game area dimensions
   useEffect(() => {
     if (canvasRef.current) {
       const { width, height } = canvasRef.current.getBoundingClientRect();
@@ -42,7 +42,6 @@ export const GameCanvas: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Main game loop
   useEffect(() => {
     if (!gameState.isGameStarted || gameState.isPaused) return;
 
@@ -55,7 +54,6 @@ export const GameCanvas: React.FC = () => {
     return () => cancelAnimationFrame(requestRef.current);
   }, [gameState.isGameStarted, gameState.isPaused, dimensions, updateGameState]);
 
-  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!gameState.isGameStarted || gameState.isPaused) return;
@@ -82,14 +80,12 @@ export const GameCanvas: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [gameState.isGameStarted, gameState.isPaused, dimensions, movePlayer, firePlayerBullet, pauseGame]);
 
-  // Render game elements
   return (
-    <div className="flex flex-col items-center h-full">
+    <div className="flex flex-col items-center justify-center h-screen w-screen relative overflow-hidden">
       <div 
         ref={canvasRef} 
         className="relative w-full h-full bg-game-darker border-2 border-neon-blue overflow-hidden"
       >
-        {/* Game elements */}
         {gameState.isGameStarted && (
           <>
             <PlayerShip player={gameState.player} />
@@ -112,18 +108,25 @@ export const GameCanvas: React.FC = () => {
           </>
         )}
 
-        {/* Game overlay states */}
         {!gameState.isGameStarted && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-game-darker bg-opacity-80 z-10">
-            <h1 className="text-3xl md:text-5xl font-bold text-gradient mb-8 animate-pulse-neon">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-game-darker bg-opacity-90 z-20">
+            <h1 className="text-4xl md:text-6xl font-bold text-gradient mb-8 animate-pulse-neon">
               Kyle's Galactic Rage
             </h1>
-            <button 
-              onClick={startGame}
-              className="px-8 py-4 bg-neon-purple text-white rounded-md hover:bg-opacity-80 transition-all"
-            >
-              Start Game
-            </button>
+            
+            <div className="flex flex-col items-center space-y-6">
+              <Separator className="w-64 bg-neon-purple mb-4" />
+              
+              <button 
+                onClick={startGame}
+                className="flex items-center justify-center px-10 py-4 bg-neon-purple text-white rounded-lg 
+                           hover:bg-opacity-80 transition-all transform hover:scale-105 
+                           focus:outline-none focus:ring-2 focus:ring-neon-purple focus:ring-opacity-50"
+              >
+                <Gamepad className="mr-3 h-6 w-6" />
+                Start Game
+              </button>
+            </div>
           </div>
         )}
 
@@ -152,7 +155,6 @@ export const GameCanvas: React.FC = () => {
           </div>
         )}
 
-        {/* HUD - Heads up display */}
         {gameState.isGameStarted && (
           <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-2 bg-game-darker bg-opacity-80 z-5">
             <div className="flex items-center space-x-4">
@@ -170,7 +172,6 @@ export const GameCanvas: React.FC = () => {
         )}
       </div>
 
-      {/* Game controls for mobile */}
       {gameState.isGameStarted && !gameState.isGameOver && (
         <div className="absolute bottom-8 left-0 right-0 flex justify-center">
           <GameControls 
